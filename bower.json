@@ -1,0 +1,26 @@
+{
+  "name": "ellipsme",
+  "main": "ellipsme.js",
+  "version": "0.0.1",
+  "authors": [
+    "chriskjaer <chriskjaer.dk@gmail.com>"
+  ],
+  "description": "Responsive truncating made simple.",
+  "keywords": [
+    "truncating",
+    "ellipsis",
+    "trunc",
+    "ellipsme",
+    "responsive",
+    "rwd",
+    "truncate"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
