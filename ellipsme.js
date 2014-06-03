@@ -13,7 +13,6 @@ var ellipsme = (function () {
     return items;
   }
 
-
   function getMaxChars(item) {
     var parent = item.parentElement,
         height = parent.offsetHeight,

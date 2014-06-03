@@ -1,0 +1,34 @@
+{
+  "name": "ellipsme",
+  "version": "0.0.1",
+  "description": "Responsive truncating made simple...",
+  "main": "ellipsme.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/chriskjaer/ellipsme.git"
+  },
+  "keywords": [
+    "truncating",
+    "ellipsis",
+    "trunc",
+    "ellipsme",
+    "responsive",
+    "rwd",
+    "truncate"
+  ],
+  "author": "Chris Kjær Sørensen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chriskjaer/ellipsme/issues"
+  },
+  "homepage": "https://github.com/chriskjaer/ellipsme",
+  "devDependencies": {
+    "browser-sync": "^0.9.1",
+    "gulp": "^3.7.0",
+    "gulp-concat": "^2.2.0",
+    "gulp-uglify": "^0.3.0"
+  }
+}
