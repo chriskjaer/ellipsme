@@ -24,7 +24,9 @@ var ellipsme = (function () {
 
   function truncateItems(items) {
     [].forEach.call(items, function(item) {
-      item.innerHTML = item.originalText.slice(0, getMaxChars(item)) + '…';
+      var maxChars = getMaxChars(item),
+          ellipse = maxChars >= item.originalText.length ? '' : '…';
+      item.innerHTML = item.originalText.slice(0, maxChars) + ellipse;
     });
   }
 
