@@ -4,10 +4,20 @@ var ellipsme = (function () {
 
   function getInfo(items) {
     [].forEach.call(items, function(item) {
-      var styles = window.getComputedStyle(item);
-      item.originalText = item.innerHTML.trim();
+      item.setAttribute('data-ellipsme', 'loading');
+
+      var styles = window.getComputedStyle(item),
+          parentStyles = window.getComputedStyle(item.parentElement);
+
+      item.paddingHorizontal = parseInt(parentStyles.getPropertyValue('padding-left')) + parseInt(parentStyles.getPropertyValue('padding-right'));
+      item.paddingVertical = parseInt(parentStyles.getPropertyValue('padding-top')) + parseInt(parentStyles.getPropertyValue('padding-bottom'));
+      item.originalText = item.textContent.trim();
       item.lineHeight = parseInt(styles.getPropertyValue('line-height'), 10);
       item.fontSize = parseInt(styles.getPropertyValue('font-size'), 10);
+      item.charSize = (item.offsetWidth / item.textContent.length) * 1.2;
+      item.removeAttribute('data-ellipsme');
+
+      console.log('Char Size: ' + item.charSize + 'px \nFont Size: ' + item.fontSize + 'px');
     });
 
     return items;
@@ -15,18 +25,17 @@ var ellipsme = (function () {
 
   function getMaxChars(item) {
     var parent = item.parentElement,
-        height = parent.offsetHeight,
-        width = parent.offsetWidth,
-        fontWidth = item.fontSize * 0.60; // We assume the average character width is 40% of the font size
-
-    return Math.ceil(width / fontWidth) * (height / item.lineHeight);
+        height = parent.offsetHeight - item.paddingVertical,
+        width = parent.offsetWidth - item.paddingHorizontal;
+    var maxChars = Math.ceil((width / item.charSize) * (height / item.lineHeight));
+    return maxChars;
   }
 
   function truncateItems(items) {
     [].forEach.call(items, function(item) {
       var maxChars = getMaxChars(item),
           ellipse = maxChars >= item.originalText.length ? '' : '…';
-      item.innerHTML = item.originalText.slice(0, maxChars) + ellipse;
+      item.textContent = item.originalText.slice(0, maxChars) + ellipse;
     });
   }
 
