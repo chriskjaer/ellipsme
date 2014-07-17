@@ -6,15 +6,22 @@ var ellipsme = (function () {
     [].forEach.call(items, function(item) {
       item.setAttribute('data-ellipsme', 'loading');
 
-      var styles = window.getComputedStyle(item),
-          parentStyles = window.getComputedStyle(item.parentElement);
+      var getStyle = {
+        parent: function (prop) {
+          return parseInt(window.getComputedStyle(item.parentElement).getPropertyValue(prop), 10);
+        },
+        current: function (prop) {
+          return parseInt(window.getComputedStyle(item).getPropertyValue(prop), 10);
+        }
+      };
 
-      item.paddingHorizontal = parseInt(parentStyles.getPropertyValue('padding-left')) + parseInt(parentStyles.getPropertyValue('padding-right'));
-      item.paddingVertical = parseInt(parentStyles.getPropertyValue('padding-top')) + parseInt(parentStyles.getPropertyValue('padding-bottom'));
-      item.originalText = item.textContent.trim();
-      item.lineHeight = parseInt(styles.getPropertyValue('line-height'), 10);
-      item.fontSize = parseInt(styles.getPropertyValue('font-size'), 10);
-      item.charSize = (item.offsetWidth / item.textContent.length) * 1.2;
+      item.paddingHorizontal = getStyle.parent('padding-left') + getStyle.parent('padding-right');
+      item.paddingVertical   = getStyle.parent('padding-top') + getStyle.parent('padding-bottom');
+      item.originalText      = item.textContent.trim();
+      item.lineHeight        = getStyle.current('line-height');
+      item.fontSize          = getStyle.current('font-size');
+      item.charSize          = (item.offsetWidth / item.textContent.length) * 1.2;
+
       item.removeAttribute('data-ellipsme');
 
       console.log('Char Size: ' + item.charSize + 'px \nFont Size: ' + item.fontSize + 'px');
